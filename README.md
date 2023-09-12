@@ -7,7 +7,7 @@ The application helps Users to get the audio of social media and YouTube videos 
 
 For me, I love listening to music and some of these music are in video form. Except for the use of Spotify, Audiomack etc., my next option is music videos hence when a need to build a Portfolio Project came up, I decided to use the ample opportunity to satisfy my want.
 
-- Live Preview: [Audioify Live Demo](https://ordioplay.pythonanywhere.com/)
+- Live Preview: [Ordioplay Live Demo](https://ordioplay.pythonanywhere.com/)
 - Final Project Blog Article: [Read the Blog Post](https://medium.com/@stanleypaul313/social-media-video-to-audio-conversion-application-b8841982e1ed)
 - My LinkedIn Profile: [Stanley Chiemela Paul](https://linkedin.com/in/stanleychiemelapaul)
 
