@@ -7,8 +7,8 @@
 	<meta name="keywords" content="">
 
 	<title>OrdioPlay - Extract and Download audio From Videos</title>
-	
-	
+
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="author" content="Stanley Paul">
@@ -16,20 +16,34 @@
     <link type="text/css" rel="stylesheet" href="/static/css/main.css" />
 </head>
 <body>
+    {% block content %}
     <div class="s006">
         <div class="overlay"></div>
-        <form>
+
+        <form method="post" class="form" action="/extractaudio">
             <fieldset>
-                <legend style="margin-bottom: 10px;">OrdioPlay</legend>
-                <legend style="font-size: 16px; font-weight: 500;">Play videos as audio</legend>
+                <legend style="margin-bottom: 10px; text-align: center; width: 100%;">OrdioPlay</legend>
+                <legend style="font-size: 16px; font-weight: 500; text-align: center;">Stream videos as audio</legend>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul style="background: white; padding: 6px; list-style: none; max-width: inherit; text-align: center;">
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
                 <div style="margin-top: 0; " class="inner-form">
                     <div class="input-field">
-                        <button class="btn-search" type="button">
+                        <button class="btn-search" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
                             </svg>
                         </button>
-                        <input id="search" type="text" placeholder="Enter the URL of the Video"/>
+                        {{ form.video_link(class_ = 'form-control', placeholder='http://', autofocus = true) }}
+
+
+                        <!--<input id="search" type="text" placeholder="Enter the URL of the Video"/>-->
                     </div>
                 </div>
                 <div class="suggestion-wrap">
@@ -37,10 +51,29 @@
                     <span>YouTube Videos</span>
                     <span>Instagram Videos</span>
                     <span>Twitter Videos</span>
+
                 </div>
             </fieldset>
         </form>
+        {% if audio_stream %}
+        <div class="audio-player">
+            <h2>Audio Player</h2>
+            <audio controls>
+                <source src="data:audio/mpeg;base64,{{ audio_stream|b64encode }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        {% endif %}
     </div>
 
+    {% endblock %}
+
+    <!--<script>-->
+    <!--    function playAudio() {-->
+    <!--        var audioPlayer = document.getElementById('audioPlayer');-->
+    <!--        audioPlayer.src = "{{ url_for('extractaudio') }}";-->
+    <!--        audioPlayer.play();-->
+    <!--    }-->
+    <!--</script>-->
 </body>
 </html>
